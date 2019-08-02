@@ -6,19 +6,22 @@ class Profile {
         this.password = password;
     }
 
-    newUserAdd(callback) {
-        ApiConnector.createUser(this.username, this.name, this.password,  (err, data) => {
+    newUserAdd(callback) {        
+        let userName = this.username, nameReal = {firstName: this.name.firstName,
+             lastName: this.name.lastName}, passworUser = this.password;
+        console.log(userName, nameReal, passworUser);
+        return ApiConnector.createUser({ userName, nameReal: { firstName, lastName }, passworUser },  (err, data) => {
             console.log(`Adding ${this.username}`);
             callback(err, data);
         });
     } 
 
-    authorization(callback) {
-        ApiConnector.performLogin(this.username, this.password,  (err, data) => {
+  /*  authorization(callback) {//;
+        return ApiConnector.performLogin({ this.username, this.password },  (err, data) => {
             console.log(`Wrong ${this.username}`);
             callback(err, data);
         });
-        console.log(this.username);
+        
     }
 
     moneyAddToWallet({ currency, amount }, callback) {
@@ -28,9 +31,9 @@ class Profile {
         });
   
     }
-    /*
+    
     currencyConversion({ fromCurrency, targetCurrency, targetAmount}, callback) {
-        return ApiConnector.convertMoney({ fromCurrency, targetCurrency, targetAmount}, (err, data) => {
+        return ApiConnector.convertMoney({ fromCurrency, targetCurrency, targetAmount }, (err, data) => {
             console.log(`Convert ${targetAmount} from ${fromCurrency} to ${targetCurrency}`);
             callback(err, data);
         });
@@ -38,7 +41,7 @@ class Profile {
     }
      
     tokenTo({ usernameResiver, resiverSum}, callback) {
-        return ApiConnector.transferMoney({usernameResiver, resiverSum}, (err, data) => {
+        return ApiConnector.transferMoney({ usernameResiver, resiverSum }, (err, data) => {
             console.log(`Transfer ${resiverSum} from ${this.username} to ${usernameResiver}`);
             callback(err, data);
         });
@@ -59,23 +62,26 @@ function main() {
         name: { firstName: 'Petr', lastName: 'Pupkin' },
         password: 'petrpass'
     });
+    console.log(Petr);
     Petr.newUserAdd();
  // Petr.authorization();
  
 }
 
 
-/*
-function main(){
+
+/*function main(){
     const Ivan = new Profile({
                     username: 'ivan',
                     name: { firstName: 'Ivan', lastName: 'Chernyshev' },
                     password: 'ivanspass',
                 });
+                console.log(Ivan);
+                Ivan.newUserAdd();
     // сначала создаем и авторизуем пользователя
 
     // после того, как мы авторизовали пользователя, добавляем ему денег в кошелек
-    
+  /*  
     Petr.moneyAddToWallet({ currency: 'RUB', amount: 100 }, (err, data) => {
         if (err) {
                 console.error('Error during adding money to Petr');
@@ -83,5 +89,5 @@ function main(){
                 console.log(`Added 500000 euros to Petr`);
         }});
   console.log('ok');
-
-*/
+    }*/
+main();
