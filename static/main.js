@@ -7,10 +7,10 @@ class Profile {
     }
 
     newUserAdd(callback) {        
-        let userName = this.username, nameReal = {firstName: this.name.firstName,
+        let userName = this.username, name = {firstName: this.name.firstName,
              lastName: this.name.lastName}, passworUser = this.password;
-        console.log(userName, nameReal, passworUser);
-        return ApiConnector.createUser({ userName, nameReal: { firstName, lastName }, passworUser },  (err, data) => {
+        console.log(userName, name, passworUser);
+        return ApiConnector.createUser({ userName, name, passworUser },  (err, data) => {
             console.log(`Adding ${this.username}`);
             callback(err, data);
         });
@@ -63,7 +63,7 @@ function main() {
         password: 'petrpass'
     });
     console.log(Petr);
-    Petr.newUserAdd();
+   Petr.newUserAdd();
  // Petr.authorization();
  
 }
