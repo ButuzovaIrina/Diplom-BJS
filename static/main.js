@@ -7,23 +7,20 @@ class Profile {
     }
 
     newUserAdd(callback) {        
-        let userName = this.username, name = {firstName: this.name.firstName,
-             lastName: this.name.lastName}, passworUser = this.password;
-        console.log(userName, name, passworUser);
-        return ApiConnector.createUser({ userName, name, passworUser },  (err, data) => {
-            console.log(`Adding ${this.username}`);
+        return ApiConnector.createUser({ username: this.username, name: this.name, password: this.password },  (err, data) => {
+            console.log(`Adding ${this.username} error`);
             callback(err, data);
         });
     } 
 
-  /*  authorization(callback) {//;
-        return ApiConnector.performLogin({ this.username, this.password },  (err, data) => {
+    authorization(callback) {
+        return ApiConnector.performLogin({ name: this.username, password: this.password },  (err, data) => {
             console.log(`Wrong ${this.username}`);
             callback(err, data);
         });
         
     }
-
+/*
     moneyAddToWallet({ currency, amount }, callback) {
         return ApiConnector.addMoney({ currency, amount }, (err, data) => {
             console.log(`Adding ${amount} of ${currency} to ${this.username}`);
@@ -63,7 +60,7 @@ function main() {
         password: 'petrpass'
     });
     console.log(Petr);
-   Petr.newUserAdd();
+    Petr.newUserAdd();
  // Petr.authorization();
  
 }
